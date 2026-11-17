@@ -1,13 +1,17 @@
-# JonahCraft
+# JonahCraft — free hosting update
 
-Original browser voxel game for Jonah’s Games. This public repository contains source code only. Passwords, accounts, session tokens and saved worlds are created on the private server and are never included in this repository.
+Original browser voxel game for Jonah’s Games. This public repository contains code only. Accounts, password hashes, tokens, inventory and saved worlds belong in the private cloud database, never in this repository.
 
-The complete game source, documentation, original pixel artwork, MIT licenses and tests are in **JonahCraft.zip**. Extract the ZIP to inspect or run the project locally. Its `README.md` lists controls, owner setup, security, hosting instructions and unfinished features.
+**No paid hosting is selected.** Version 0.1.1 adapts the game to Render Free plus Turso Free. The game source, tests, original art, licenses and full instructions are in **JonahCraft.zip**. Read `FREE-HOSTING.md` inside it before deployment.
 
-Render builds this repository with Node.js 24 and `node unpack.mjs`, then starts `node server.mjs`. The small build script extracts the vetted source archive; it rejects runtime databases and private environment files. There are no package dependencies to download. The build log records the source archive’s SHA-256.
+Render builds with Node.js 24.22.1 and `node unpack.mjs && npm ci --omit=dev`, then starts `node server.mjs`. The build script extracts the vetted source package and rejects runtime databases or private environment files. It prints the archive's SHA-256 for verification. libSQL 0.5.29 is pinned in the package lock; it provides a local read replica with writes committed to the remote primary.
 
-Use one Node web service with a persistent disk mounted at `/var/data`. Set HOST=0.0.0.0, DATA_DIR=/var/data, NODE_ENV=production and TRUST_PROXY=1. The server uses Render’s own HTTPS URL automatically, or PUBLIC_URL when a custom domain is supplied. Its health check is `/api/status`.
+The free server has no persistent disk. Set `REQUIRE_REMOTE_DB=1`, supply the database-scoped `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` through Render's private runtime variables, and use `DATA_DIR=/tmp/jonahcraft`. Never commit those credentials. The server refuses a temporary-only save configuration when remote storage is required.
 
-Complete the initial Jonah owner setup privately with `node owner-setup.mjs` in the service’s private shell. Never put a password in a source file, environment variable, command argument or public chat.
+Free Render sleeps after inactivity and has traffic/build quotas. Stay on the Free compute plan, do not attach a paid disk or add payment details, and leave paid database overages disabled. The remote database preserves game records when the server restarts; live cloud schema, remote writes, transactions and fresh-replica persistence checks have passed.
 
-The source game and Three.js have MIT licenses included in the ZIP. This project is not Minecraft or Eaglercraft and does not use their code or assets.
+The private HTTPS owner setup requires a one-time `OWNER_SETUP_TOKEN` held in private server configuration. Enter the initial owner password privately on the setup form. The setup locks permanently once the authenticated Jonah owner account exists. No owner password or setup secret is printed in server logs or included in source.
+
+Verification so far: all eight tests pass with the libSQL driver locally, including gameplay, secure accounts, every owner permission, saving/restarting, mining/crafting/combat, Nether return travel, database-backed backups and guarded owner setup. Public cloud deployment and both arcade Play links remain pending deployment verification and private owner setup.
+
+Game code/art: MIT. Three.js and libSQL: MIT; notices are included in the source package. This is an independent original game, not Minecraft or Eaglercraft.

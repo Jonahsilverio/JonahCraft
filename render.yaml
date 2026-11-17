@@ -1,16 +1,13 @@
+# $0 compute. Requires a separately connected Turso Free database.
 services:
   - type: web
     name: jonahcraft
     runtime: node
-    plan: 0.5c-512mb
+    plan: free
     numInstances: 1
-    buildCommand: node unpack.mjs
+    buildCommand: node unpack.mjs && npm ci --omit=dev
     startCommand: node server.mjs
     healthCheckPath: /api/status
-    disk:
-      name: jonahcraft-worlds
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: NODE_VERSION
         value: 24.22.1
@@ -19,8 +16,16 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATA_DIR
-        value: /var/data
+        value: /tmp/jonahcraft
       - key: TRUST_PROXY
         value: "1"
       - key: SKIP_INSTALL_DEPS
         value: "true"
+      - key: REQUIRE_REMOTE_DB
+        value: "1"
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: OWNER_SETUP_TOKEN
+        generateValue: true
