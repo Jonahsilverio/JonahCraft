@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: jonahcraft
+    runtime: node
+    plan: 0.5c-512mb
+    numInstances: 1
+    buildCommand: node unpack.mjs
+    startCommand: node server.mjs
+    healthCheckPath: /api/status
+    disk:
+      name: jonahcraft-worlds
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: TRUST_PROXY
+        value: "1"
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
