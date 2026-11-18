@@ -1,20 +1,13 @@
-# JonahCraft — free hosting update
+# JonahCraft 0.2.0
 
-Original browser voxel game for Jonah’s Games. This public repository contains code only. Accounts, password hashes, tokens, inventory and saved worlds belong in the private cloud database, never in this repository.
+Original browser voxel game for Jonah’s Games. The full source, original art, tests, licenses and hosting instructions are in JonahCraft.zip. Runtime accounts, password hashes, tokens, private keys and worlds are never part of this repository.
 
-**No paid hosting is selected.** Version 0.1.2 adapts the game to Render Free plus Turso Free. The game source, tests, original art, licenses and full instructions are in **JonahCraft.zip**. Read `FREE-HOSTING.md` inside it before deployment.
+This update adds authenticated private singleplayer worlds with saved progress and menu pausing. Multiplayer remains shared. Singleplayer needs internet; it is not an offline mode. Existing seeds and shared worlds remain compatible. The visual update adds original pixel block textures, ambient corner shading, warm emitted light, mining cracks and a chunky original title.
 
-Render builds with Node.js 24.22.1 and `node unpack.mjs && npm ci --omit=dev`, then starts `node server.mjs`. The build script extracts the vetted source package and rejects runtime databases or private environment files. It prints the archive's SHA-256 for verification. libSQL 0.5.29 is pinned in the package lock; it provides a local read replica with writes committed to the remote primary.
+Stay on Render Free and Turso Free. Existing private Render variables connect the persistent database; do not add a paid disk or billing plan. Render can sleep and take about a minute to wake. Read FREE-HOSTING.md inside the source archive.
 
-The free server has no persistent disk. Set `REQUIRE_REMOTE_DB=1`, supply the database-scoped `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` through Render's private runtime variables, and use `DATA_DIR=/tmp/jonahcraft`. Never commit those credentials. The server refuses a temporary-only save configuration when remote storage is required.
+The build command is node unpack.mjs && npm ci --omit=dev. It starts node server.mjs. Node 24 and libSQL 0.5.29 are pinned. Owner commands still check the authenticated owner account ID on the server. The separate initial Jonah owner password must be entered privately during setup; none is embedded in source.
 
-Free Render sleeps after inactivity and has traffic/build quotas. Stay on the Free compute plan, do not attach a paid disk or add payment details, and leave paid database overages disabled. The remote database preserves game records when the server restarts; live cloud schema, remote writes, transactions and fresh-replica persistence checks have passed.
+All 10 local tests passed, including private-world denial, pause/resume, save/restart, gameplay, Nether travel, account and owner security, and worker geometry. Production verification is recorded in the delivery status.
 
-The private HTTPS owner setup requires a one-time `OWNER_SETUP_TOKEN` held in private server configuration. Enter the initial owner password privately on the setup form. The setup locks permanently once the authenticated Jonah owner account exists. No owner password or setup secret is printed in server logs or included in source.
-
-Verification so far: all eight tests pass with the libSQL driver locally, including gameplay, secure accounts, every owner permission, saving/restarting, mining/crafting/combat, Nether return travel, database-backed backups and guarded owner setup. Public cloud deployment and both arcade Play links remain pending deployment verification and private owner setup.
-
-Game code/art: MIT. Three.js and libSQL: MIT; notices are included in the source package. This is an independent original game, not Minecraft or Eaglercraft.
-
-
-Pixel UI update: original gray beveled menus, Tiny5 pixel lettering, pixel health and hunger, a nine-slot hotbar, gray inventory, brighter pixel terrain, stone-backed ores and an original first-person arm with held blocks and tools. Tiny5 uses the SIL Open Font License included in the source package.
+This is an independent game, not Minecraft, Eaglercraft, or a compatible Minecraft client/server. Code and original art: MIT. Three.js and libSQL: MIT. Tiny5 font: SIL Open Font License.
