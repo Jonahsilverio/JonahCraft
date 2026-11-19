@@ -1,4 +1,4 @@
-# JonahCraft 0.3.0
+# JonahCraft 0.3.1
 
 Original browser voxel game. Full source, original artwork, licenses, tests and hosting instructions are in JonahCraft.zip. Runtime accounts, credentials and saved worlds are excluded.
 
