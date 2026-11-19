@@ -1,13 +1,13 @@
-# JonahCraft 0.2.0
+# JonahCraft 0.3.0
 
-Original browser voxel game for Jonah’s Games. The full source, original art, tests, licenses and hosting instructions are in JonahCraft.zip. Runtime accounts, password hashes, tokens, private keys and worlds are never part of this repository.
+Original browser voxel game. Full source, original artwork, licenses, tests and hosting instructions are in JonahCraft.zip. Runtime accounts, credentials and saved worlds are excluded.
 
-This update adds authenticated private singleplayer worlds with saved progress and menu pausing. Multiplayer remains shared. Singleplayer needs internet; it is not an offline mode. Existing seeds and shared worlds remain compatible. The visual update adds original pixel block textures, ambient corner shading, warm emitted light, mining cracks and a chunky original title.
+This release rebuilds the original pixel block and item art, adds a gradient sky, square sun/moon, stars, merged block clouds, daylight propagation below trees and at cave mouths, underwater fog, isometric inventory cubes, thick held tools and a larger classic hotbar. Field of view and optional view bobbing are adjustable. F3 shows coordinates. Existing terrain seeds, saves, block IDs and multiplayer permissions are unchanged. Private singleplayer uses authenticated cloud saves and requires internet.
 
-Stay on Render Free and Turso Free. Existing private Render variables connect the persistent database; do not add a paid disk or billing plan. Render can sleep and take about a minute to wake. Read FREE-HOSTING.md inside the source archive.
+Account creation and private owner setup accept passwords of 8–128 characters. Passwords remain salted and scrypt-hashed. Jonah ownership is tied only to the server account ID. The initial owner password must be entered privately by Jonah; none is embedded in source.
 
-The build command is node unpack.mjs && npm ci --omit=dev. It starts node server.mjs. Node 24 and libSQL 0.5.29 are pinned. Owner commands still check the authenticated owner account ID on the server. The separate initial Jonah owner password must be entered privately during setup; none is embedded in source.
+All 11 automated tests passed, covering saving/restart, private singleplayer, accounts and owner authorization, multiplayer, mining, crafting, furnace, combat, Nether and mesh geometry. Browser and live-deployment verification is recorded in the delivery notes.
 
-All 10 local tests passed, including private-world denial, pause/resume, save/restart, gameplay, Nether travel, account and owner security, and worker geometry. Production verification is recorded in the delivery status.
+Use the existing Render Free and Turso Free services. Do not enable paid disks or plans. Render may sleep and take a minute to wake. Build: node unpack.mjs && npm ci --omit=dev. Start: node server.mjs. Node 24 and libSQL 0.5.29 are pinned.
 
-This is an independent game, not Minecraft, Eaglercraft, or a compatible Minecraft client/server. Code and original art: MIT. Three.js and libSQL: MIT. Tiny5 font: SIL Open Font License.
+Independent game, not Minecraft, Eaglercraft or a compatible client/server. No Mojang assets are used. Code/art/Three.js/libSQL: MIT. Tiny5: SIL Open Font License.
